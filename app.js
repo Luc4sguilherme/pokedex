@@ -1,11 +1,12 @@
-let offset = 0
+let offset = 1
 const limit = 50
+const amountOfPokemon = 850
 
 const getPokemonURL = id => `https://pokeapi.co/api/v2/pokemon/${id}`
 
 const generatePokemonPromises = () => Array(limit)
   .fill()
-  .map((_, index) => fetch(getPokemonURL(index + offset + 1))
+  .map((_, index) => fetch(getPokemonURL(index + offset))
     .then(response => response.json()))
 
 const getImage = (sprites) => {
@@ -50,7 +51,7 @@ async function getPokemon() {
 }
 
 window.addEventListener('scroll', function () {
-  if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && offset < 850) {
+  if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && offset < (amountOfPokemon - limit)) {
     setTimeout(async () => {
       offset += limit
       await getPokemon()
