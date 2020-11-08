@@ -50,11 +50,19 @@ async function getPokemon() {
     .then(insertPokemonsIntoPage)
 }
 
-window.addEventListener('scroll', async function () {
+window.addEventListener('scroll', async () => {
   if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && offset < (amountOfPokemon - limit)) {
     offset += limit
     await getPokemon()
-    window.scrollTo(0, window.scrollY)
+    window.moveTo(0, 1)
+  }
+})
+
+window.addEventListener('touchmove', async () => {
+  if (((window.innerHeight + window.scrollY)  >= document.body.offsetHeight - 50) && offset < (amountOfPokemon - limit)) {
+    offset += limit
+    await getPokemon()
+    window.moveTo(0, 1)
   }
 })
 
