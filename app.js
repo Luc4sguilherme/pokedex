@@ -10,9 +10,9 @@ const generatePokemonPromises = () => Array(limit)
     .then(response => response.json()))
 
 const getImage = (sprites) => {
-  if(sprites.other.dream_world.front_default !== null) {
+  if (sprites.other.dream_world.front_default !== null) {
     return sprites.other.dream_world.front_default
-  } else if(sprites.other["official-artwork"].front_default !== null) {
+  } else if (sprites.other["official-artwork"].front_default !== null) {
     return sprites.other["official-artwork"].front_default
   } else {
     return sprites.front_default
@@ -50,13 +50,11 @@ async function getPokemon() {
     .then(insertPokemonsIntoPage)
 }
 
-window.addEventListener('scroll', function () {
+window.addEventListener('scroll', async function () {
   if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && offset < (amountOfPokemon - limit)) {
-    setTimeout(async () => {
-      offset += limit
-      await getPokemon()
-      window.scrollTo(0, window.scrollY)
-    }, 500);
+    offset += limit
+    await getPokemon()
+    window.scrollTo(0, window.scrollY)
   }
 })
 
