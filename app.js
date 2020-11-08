@@ -8,6 +8,16 @@ const generatePokemonPromises = () => Array(limit)
   .map((_, index) => fetch(getPokemonURL(index + offset + 1))
     .then(response => response.json()))
 
+const getImage = (sprites) => {
+  if(sprites.other.dream_world.front_default !== null) {
+    return sprites.other.dream_world.front_default
+  } else if(sprites.other["official-artwork"].front_default !== null) {
+    return sprites.other["official-artwork"].front_default
+  } else {
+    return sprites.front_default
+  }
+}
+
 const generateHTML = pokemons => pokemons.reduce((accumulator, {
   id,
   name,
@@ -18,7 +28,7 @@ const generateHTML = pokemons => pokemons.reduce((accumulator, {
 
   accumulator += `  
     <li class="card ${elementTypes[0]}">
-      <img class="card-image" src="${sprites.other.dream_world.front_default}" alt="${name}"/>
+      <img class="card-image" src="${getImage(sprites)}" alt="${name}"/>
       <h2 class="card-title">${id}. ${name}</h2>
       <p class="card-subtitle">${elementTypes.join(' | ')}</p>
     </li>
