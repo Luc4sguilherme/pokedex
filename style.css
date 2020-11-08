@@ -45,65 +45,76 @@ h1 {
   left: 25%;
 }
 
+.ghost {
+  background-color: rgba(88, 106, 178, 0.5);
+}
+
+.dark {
+  background-color:  rgba(97, 96, 113, 0.5)
+}
+
 .steel {
-  background-color: #f4f4f4;
+  background-color: rgba(85, 154, 164, 0.5);
 }
 
 .fire {
-  background-color: #FDDFDF;
+  background-color: rgba(255, 165, 79, 0.5);
 }
 
 .grass {
-  background-color: #DEFDE0;
+  background-color: rgba(51, 189, 101, 0.5);
 }
 
 .electric {
-  background-color: #FCF7DE;
+  background-color: rgba(245, 214, 74, 0.5);
 }
 
-.water,
+.water {
+  background-color:rgba(92, 165, 219, 0.5);
+}
+
 .ice {
-  background-color: #DEF3FD;
+  background-color: rgba(123, 209, 198, 0.5);
 }
 
 .ground {
-  background-color: #f4e7da;
+  background-color: rgba(216, 126, 77, 0.5);
 }
 
 .rock {
-  background-color: #d5d5d4;
+  background-color: rgba(204, 189, 141, 0.5);
 }
 
 .fairy {
-  background-color: #fceaff;
+  background-color: rgba(240, 154, 229, 0.5);
 }
 
 .poison {
-  background-color: #98d7a5;
+  background-color: rgba(171, 101, 201, 0.5);
 }
 
 .bug {
-  background-color: #f8d5a3;
+  background-color: rgba(150, 195, 46, 0.5);
 }
 
 .dragon {
-  background-color: #97b3e6;
+  background-color: rgba(8, 112, 192, 0.5);
 }
 
 .psychic {
-  background-color: #eaeda1;
+  background-color: rgba(250, 123, 126, 0.5);
 }
 
 .flying {
-  background-color: #F5F5F5;
+  background-color: rgba(154, 179, 229, 0.5);
 }
 
 .fighting {
-  background-color: #E6E0D4;
+  background-color: rgba(211, 65, 99, 0.5);
 }
 
 .normal {
-  background-color: #F5F5F5;
+  background-color: rgba(155, 159, 160, 0.5);
 }
 
 .card:hover {
@@ -129,6 +140,9 @@ h1 {
 
 .card-image {
   height: 180px;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
   position: relative;
   z-index: 2;
 }
