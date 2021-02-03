@@ -1,13 +1,8 @@
-let offset = 1
+let offset = 0
 const limit = 50
-const amountOfPokemon = 850
+const amountOfPokemon = 1118
 
-const getPokemonURL = id => `https://pokeapi.co/api/v2/pokemon/${id}`
-
-const generatePokemonPromises = () => Array(limit)
-  .fill()
-  .map((_, index) => fetch(getPokemonURL(index + offset))
-    .then(response => response.json()))
+const getPokemonURL = (limit, offset) => fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`).then(response => response.json())
 
 const getImage = (sprites) => {
   if (sprites.other.dream_world.front_default !== null) {
@@ -43,24 +38,32 @@ const insertPokemonsIntoPage = pokemons => {
 }
 
 async function getPokemon() {
-  const pokemonPromises = generatePokemonPromises()
-
-  await Promise.all(pokemonPromises)
+  getPokemonURL(limit, offset).then(({ results }) => {
+    Promise.all(results.map(async data => {
+      const response = await fetch(`${data.url}`)
+      const pokemon = await response.json()
+      return pokemon
+    }))
     .then(generateHTML)
     .then(insertPokemonsIntoPage)
+  })
+    
+  offset += limit
+}
+
+function getPokemonLength() {
+  return document.querySelector('.pokedex').childElementCount
 }
 
 window.addEventListener('scroll', async () => {
-  if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && offset < (amountOfPokemon - limit)) {
-    offset += limit
+  if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && getPokemonLength() < amountOfPokemon) {
     await getPokemon()
     window.moveTo(0, 1)
   }
 })
 
 window.addEventListener('touchmove', async () => {
-  if (((window.innerHeight + window.scrollY)  >= document.body.offsetHeight - 50) && offset < (amountOfPokemon - limit)) {
-    offset += limit
+  if (((window.innerHeight + window.scrollY)  >= document.body.offsetHeight - 50) && getPokemonLength() < amountOfPokemon) {
     await getPokemon()
     window.moveTo(0, 1)
   }
