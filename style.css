@@ -164,3 +164,42 @@ h1 {
     transform: translateY(0);
   }
 }
+
+@media only screen and (max-width: 740px) {
+  .pokedex {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .pokedex {
+    grid-template-columns: 1fr
+  }
+
+  .card {
+    padding: 20px;
+  } 
+  
+  .card-image {
+    height: 120px;
+  } 
+
+  .card-title {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 34px;
+  }
+}
