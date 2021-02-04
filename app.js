@@ -38,16 +38,18 @@ const insertPokemonsIntoPage = pokemons => {
 }
 
 async function getPokemon() {
-  getPokemonURL(limit, offset).then(({ results }) => {
+  getPokemonURL(limit, offset).then(({
+    results
+  }) => {
     Promise.all(results.map(async data => {
-      const response = await fetch(`${data.url}`)
-      const pokemon = await response.json()
-      return pokemon
-    }))
-    .then(generateHTML)
-    .then(insertPokemonsIntoPage)
+        const response = await fetch(`${data.url}`)
+        const pokemon = await response.json()
+        return pokemon
+      }))
+      .then(generateHTML)
+      .then(insertPokemonsIntoPage)
   })
-    
+
   offset += limit
 }
 
@@ -63,7 +65,7 @@ window.addEventListener('scroll', async () => {
 })
 
 window.addEventListener('touchmove', async () => {
-  if (((window.innerHeight + window.scrollY)  >= document.body.offsetHeight - 50) && getPokemonLength() < amountOfPokemon) {
+  if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) && getPokemonLength() < amountOfPokemon) {
     await getPokemon()
     window.moveTo(0, 1)
   }
